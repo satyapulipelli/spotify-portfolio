@@ -182,8 +182,16 @@
         }
 
         .logo-icon {
-            font-size: 2rem;
-            color: var(--spotify-green);
+            width: 32px;
+            height: 32px;
+            background: var(--spotify-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--spotify-black);
         }
 
         .logo-text {
@@ -247,11 +255,27 @@
             color: var(--spotify-text-subdued);
             cursor: pointer;
             font-size: 1.2rem;
-            transition: color 0.2s ease;
+            transition: all 0.2s ease;
         }
 
         .playlist-add:hover {
             color: var(--spotify-text-base);
+        }
+
+        .playlist-add i {
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-section.collapsed .nav-link {
+            display: none;
+        }
+
+        .sidebar-section.collapsed .playlist-add i {
+            transform: rotate(0deg);
+        }
+
+        .sidebar-section:not(.collapsed) .playlist-add i {
+            transform: rotate(45deg);
         }
 
         /* Main Content Area */
@@ -571,6 +595,13 @@
             background: linear-gradient(135deg, var(--spotify-green) 0%, #0d4f2a 100%);
         }
 
+        .album-cover-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
         .album-cover-bg.grad-2 {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
@@ -729,6 +760,32 @@
 
         .level-bar.active {
             background: var(--spotify-green);
+        }
+
+        /* Skill Animation */
+        .track-item.animating .level-bar {
+            animation: fillBar 0.6s ease-out forwards;
+            background: var(--spotify-subdued);
+        }
+
+        .track-item.animating .level-bar.active {
+            background: var(--spotify-green);
+        }
+
+        @keyframes fillBar {
+            from {
+                transform: scaleY(0);
+                transform-origin: bottom;
+            }
+            to {
+                transform: scaleY(1);
+                transform-origin: bottom;
+            }
+        }
+
+        .track-item {
+            cursor: pointer;
+            user-select: none;
         }
 
         /* Experience Timeline - Premium Concert Tour */
@@ -1100,6 +1157,12 @@
             padding: 0 20px;
             z-index: 1100; /* Higher than sidebar to overlap */
             backdrop-filter: blur(20px);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .now-playing:hover {
+            background: var(--spotify-highlight);
         }
 
         .now-playing-track {
@@ -1299,6 +1362,46 @@
             letter-spacing: 0.8px;
         }
 
+        .modal-visualization {
+            margin: 2rem 0;
+        }
+
+        .modal-visualization img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-download {
+            text-align: center;
+            padding: 2rem 0 1rem;
+            border-top: 1px solid var(--spotify-subdued);
+            margin-top: 2rem;
+        }
+
+        .btn-download {
+            background: var(--spotify-green);
+            color: var(--spotify-black);
+            padding: 12px 32px;
+            border-radius: 500px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-download:hover {
+            background: var(--spotify-green-hover);
+            transform: scale(1.04);
+        }
+
         .modal-section p {
             line-height: 1.6;
             color: var(--spotify-text-subdued);
@@ -1318,6 +1421,44 @@
             border-radius: 500px;
             font-size: 0.8rem;
             color: var(--spotify-text-base);
+        }
+
+        .modal-visuals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .modal-visual {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-visual:hover {
+            transform: scale(1.05);
+        }
+
+        .modal-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--spotify-green);
+            color: var(--spotify-black);
+            border-radius: 500px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .modal-download:hover {
+            background: var(--spotify-green-hover);
+            transform: translateY(-2px);
         }
 
         .modal-close {
@@ -1504,7 +1645,7 @@
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-section main">
             <a href="#home" class="logo">
-                <i class="fab fa-spotify logo-icon"></i>
+                <div class="logo-icon">S</div>
                 <span class="logo-text">Portfolio</span>
             </a>
 
@@ -1522,10 +1663,10 @@
             </a>
         </div>
 
-        <div class="sidebar-section">
+        <div class="sidebar-section" id="library-section">
             <div class="playlist-header">
                 <span class="playlist-title">Your Library</span>
-                <button class="playlist-add" aria-label="Add">
+                <button class="playlist-add" onclick="toggleLibrary()" aria-label="Toggle Library">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -1689,9 +1830,7 @@
             <div class="albums-grid">
                 <div class="album-card hover-lift" onclick="openProject('Science of Strength AI')">
                     <div class="album-cover">
-                        <div class="album-cover-bg" style="background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);">
-                            <i class="fas fa-robot"></i>
-                        </div>
+                        <img src="Sciofstre_workflow.png" alt="Science of Strength AI" class="album-cover-img">
                         <div class="play-overlay">
                             <i class="fas fa-play"></i>
                         </div>
@@ -1703,9 +1842,7 @@
 
                 <div class="album-card hover-lift" onclick="openProject('Crime Reporting Analysis')">
                     <div class="album-cover">
-                        <div class="album-cover-bg">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
+                        <img src="Crime_Reporting_Urbanacity_Bar.png" alt="Crime Reporting Analysis" class="album-cover-img">
                         <div class="play-overlay">
                             <i class="fas fa-play"></i>
                         </div>
@@ -1717,9 +1854,7 @@
 
                 <div class="album-card hover-lift" onclick="openProject('iPhone Quality Index')">
                     <div class="album-cover">
-                        <div class="album-cover-bg grad-2">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
+                        <img src="Iphone_trend_line.png" alt="iPhone Quality Index" class="album-cover-img">
                         <div class="play-overlay">
                             <i class="fas fa-play"></i>
                         </div>
@@ -2139,6 +2274,10 @@
                 <i class="fab fa-github"></i>
                 <span>GitHub</span>
             </a>
+            <a href="Resume.pdf" download class="contact-link">
+                <i class="fas fa-download"></i>
+                <span>Download Resume</span>
+            </a>
         </div>
     </div>
 </section>
@@ -2206,6 +2345,12 @@
             }, 1200);
         });
 
+        // Toggle Library Section
+        function toggleLibrary() {
+            const librarySection = document.getElementById('library-section');
+            librarySection.classList.toggle('collapsed');
+        }
+
         // Smooth scrolling - Updated to scroll to top properly
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -2270,49 +2415,63 @@
                 description: 'Transformed complex exercise science research papers into engaging multimedia content using advanced AI tools. Created a complete content ecosystem across multiple platforms reaching 18K+ views.',
                 tech: ['Google NotebookLM', 'ChatGPT', 'Claude', 'ImageFX', 'Revid AI', 'Prompt Engineering'],
                 impact: 'Generated 18,100+ YouTube views, 49 hours watch time, and established presence across Spotify, Instagram, and X-Twitter. Achieved 28 YouTube subscribers and 33 Instagram followers within project timeline.',
-                insights: 'Developed an end-to-end AI workflow that bridges academic research and public fitness education. Demonstrated expertise in prompt engineering, multi-platform content strategy, and AI tool orchestration.'
+                insights: 'Developed an end-to-end AI workflow that bridges academic research and public fitness education. Demonstrated expertise in prompt engineering, multi-platform content strategy, and AI tool orchestration.',
+                visuals: ['Sciofstre_workflow.png'],
+                report: null
             },
             'Crime Reporting Analysis': {
                 subtitle: 'Econometric Research Project',
                 description: 'Analyzed 28,821 crime victimization incidents from National Crime Victimization Survey using Linear Probability Models with interaction terms.',
                 tech: ['Stata', 'Linear Probability Models', 'Statistical Visualization', 'Advanced Econometrics'],
                 impact: 'Discovered significant urban-rural reporting gap of 12.4 percentage points and employment effect of 8.5 percentage points.',
-                insights: 'Challenged conventional assumptions about crime reporting through comprehensive statistical analysis and visualization.'
+                insights: 'Challenged conventional assumptions about crime reporting through comprehensive statistical analysis and visualization.',
+                visuals: ['Crime_Reporting_coeffcients.png', 'Crime_Reporting_Urbanacity_Bar.png'],
+                report: 'Pulipelli_SemesterPaper.pdf'
             },
             'iPhone Quality Index': {
                 subtitle: 'Statistical Analysis Project',
                 description: 'Constructed a Comprehensive Quality Index incorporating 12 key technical specifications weighted by consumer preferences across 45 iPhone models (2007-2024).',
                 tech: ['R', 'dplyr', 'tidyr', 'ggplot2', 'Statistical Modeling'],
                 impact: 'Demonstrated a 14.25% compound annual growth rate in iPhone quality improvements.',
-                insights: 'Created advanced visualizations revealing distinct evolutionary phases in iPhone development.'
+                insights: 'Created advanced visualizations revealing distinct evolutionary phases in iPhone development.',
+                visuals: ['Iphone_feature_contribution.png', 'Iphone_feature_heatmap.png', 'Iphone_trend_line.png'],
+                report: 'Development and Analysis of a Comprehensive iPhone Quality Index.docx'
             },
             'Data Science Salaries': {
                 subtitle: 'Machine Learning Project',
                 description: 'Developed predictive models using Multiple Linear Regression, Random Forest, and XGBoost to analyze economic factors impacting data science salaries.',
                 tech: ['Python', 'R', 'Random Forest', 'XGBoost', 'Feature Engineering'],
                 impact: 'Successfully integrated salary data with macroeconomic indicators for comprehensive analysis.',
-                insights: 'Identified key determinants of data science salaries across different countries and experience levels.'
+                insights: 'Identified key determinants of data science salaries across different countries and experience levels.',
+                visuals: ['DS_Salaries_Heatmap.pdf', 'DS_Salaries_Remote Vs. In-Office Box.pdf', 'DS_Salaries_Salary Vs. GDP_Per_Capita.pdf'],
+                report: 'Pulipelli_ECON5200_Midterm.pdf'
             },
             'State Crime Analysis': {
                 subtitle: 'Statistical Analysis Project',
                 description: 'Performed Factor Analysis and Multiple Linear Regression to analyze correlations between crime types and their relationship with state GDP & literacy rates.',
                 tech: ['SPSS', 'Factor Analysis', 'Multiple Regression', 'Data Visualization'],
                 impact: 'Created comprehensive statistical models for pattern identification across South Indian states.',
-                insights: 'Revealed significant correlations between economic indicators and crime patterns.'
+                insights: 'Revealed significant correlations between economic indicators and crime patterns.',
+                visuals: [],
+                report: 'ANALYSIS OF CRIME DATA.pdf'
             },
             'Market Penetration': {
                 subtitle: 'Business Analytics Project',
                 description: 'Implemented data-driven strategies for market penetration and product diversification at Micro SaaS Capital.',
                 tech: ['Tableau', 'SQL', 'Business Intelligence', 'Predictive Analytics'],
                 impact: 'Enhanced overall company revenue by 20% through optimized pricing models.',
-                insights: 'Improved talent acquisition efficiency by 25% through automated recruitment systems.'
+                insights: 'Improved talent acquisition efficiency by 25% through automated recruitment systems.',
+                visuals: [],
+                report: null
             },
             'Interactive Dashboards': {
                 subtitle: 'Business Intelligence Project',
                 description: 'Developed interactive Tableau dashboards to visualize portfolio trends and key performance metrics.',
                 tech: ['Tableau', 'SQL', 'Data Visualization', 'KPI Development'],
                 impact: '40% improvement in data-driven decision making and 95% client retention rate.',
-                insights: 'Enabled stakeholders to identify revenue opportunities and risk patterns effectively.'
+                insights: 'Enabled stakeholders to identify revenue opportunities and risk patterns effectively.',
+                visuals: [],
+                report: null
             }
         };
 
@@ -2326,6 +2485,39 @@
             
             modalTitle.textContent = projectName;
             modalSubtitle.textContent = project.subtitle;
+            
+            // Build visualizations HTML
+            let visualizationsHTML = '';
+            if (project.visuals && project.visuals.length > 0) {
+                visualizationsHTML = `
+                    <div class="modal-section">
+                        <h3>Visualizations</h3>
+                        <div class="modal-visualization">
+                            ${project.visuals.map(img => {
+                                // Check if it's a PDF and handle accordingly
+                                if (img.endsWith('.pdf')) {
+                                    return `<iframe src="${img}" width="100%" height="500px" style="border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);"></iframe>`;
+                                } else {
+                                    return `<img src="${img}" alt="Project visualization">`;
+                                }
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Build download button HTML
+            let downloadHTML = '';
+            if (project.report) {
+                downloadHTML = `
+                    <div class="modal-download">
+                        <a href="${project.report}" download class="btn-download">
+                            <i class="fas fa-download"></i>
+                            Download Full Report
+                        </a>
+                    </div>
+                `;
+            }
             
             modalContent.innerHTML = `
                 <div class="modal-section">
@@ -2349,6 +2541,9 @@
                     <h3>Key Insights</h3>
                     <p>${project.insights}</p>
                 </div>
+                
+                ${visualizationsHTML}
+                ${downloadHTML}
             `;
             
             modal.classList.add('active');
@@ -2366,19 +2561,104 @@
             }
         }
 
-        // Animated progress bar
-        let progress = 43;
-        setInterval(() => {
-            progress = (progress + 0.2) % 100;
-            document.querySelector('.now-playing .progress-fill').style.width = progress + '%';
+        // Static progress bar (no animation)
+        const progress = 43;
+        document.querySelector('.now-playing .progress-fill').style.width = progress + '%';
+        
+        // Set static time
+        const currentTime = Math.floor((progress / 100) * 349);
+        const minutes = Math.floor(currentTime / 60);
+        const seconds = currentTime % 60;
+        document.querySelector('.now-playing .time').textContent = 
+            `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+        // Now Playing Bar Click Handler
+        document.querySelector('.now-playing').addEventListener('click', function() {
+            // Create popup modal
+            const popup = document.createElement('div');
+            popup.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: var(--spotify-elevated);
+                padding: 2rem;
+                border-radius: 8px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+                z-index: 3000;
+                text-align: center;
+                min-width: 300px;
+                animation: popupFadeIn 0.3s ease;
+            `;
             
-            // Update time
-            const currentTime = Math.floor((progress / 100) * 349);
-            const minutes = Math.floor(currentTime / 60);
-            const seconds = currentTime % 60;
-            document.querySelector('.now-playing .time').textContent = 
-                `${minutes}:${seconds.toString().padStart(2, '0')}`;
-        }, 1000);
+            popup.innerHTML = `
+                <h3 style="color: var(--spotify-green); margin-bottom: 1rem; font-size: 1.2rem;">🚀 Project Loading</h3>
+                <p style="color: var(--spotify-text-subdued); margin-bottom: 1.5rem;">This project is currently in development and will be live soon!</p>
+                <button onclick="this.parentElement.remove()" style="
+                    background: var(--spotify-green);
+                    color: var(--spotify-black);
+                    border: none;
+                    padding: 8px 24px;
+                    border-radius: 500px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                ">Got it!</button>
+            `;
+            
+            document.body.appendChild(popup);
+            
+            // Remove popup when clicking outside
+            setTimeout(() => {
+                document.addEventListener('click', function removePopup(e) {
+                    if (!popup.contains(e.target)) {
+                        popup.remove();
+                        document.removeEventListener('click', removePopup);
+                    }
+                });
+            }, 100);
+        });
+
+        // Skills Animation
+        document.querySelectorAll('.track-item').forEach(track => {
+            let hoverTimer;
+            let isAnimating = false;
+            
+            // Function to trigger animation
+            const triggerAnimation = () => {
+                if (!isAnimating) {
+                    isAnimating = true;
+                    track.classList.add('animating');
+                    
+                    // Animate each bar with delay
+                    const bars = track.querySelectorAll('.level-bar');
+                    bars.forEach((bar, index) => {
+                        bar.style.animationDelay = `${index * 0.1}s`;
+                    });
+                    
+                    // Remove animation class after completion
+                    setTimeout(() => {
+                        track.classList.remove('animating');
+                        isAnimating = false;
+                        bars.forEach(bar => {
+                            bar.style.animationDelay = '';
+                        });
+                    }, 1000);
+                }
+            };
+            
+            // Click handler
+            track.addEventListener('click', triggerAnimation);
+            
+            // Hover for 3 seconds handler
+            track.addEventListener('mouseenter', () => {
+                hoverTimer = setTimeout(triggerAnimation, 3000);
+            });
+            
+            track.addEventListener('mouseleave', () => {
+                clearTimeout(hoverTimer);
+            });
+        });
 
         // Add subtle parallax effect
         window.addEventListener('scroll', () => {
@@ -2388,6 +2668,21 @@
                 hero.style.transform = `translateY(${scrolled * 0.2}px)`;
             }
         });
+        // Add CSS for popup animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes popupFadeIn {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(0.9);
+                }
+                to {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(1);
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
