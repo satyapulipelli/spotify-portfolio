@@ -1384,15 +1384,15 @@
         .btn-download {
             background: var(--spotify-green);
             color: var(--spotify-black);
-            padding: 12px 32px;
+            padding: 10px 20px;
             border-radius: 500px;
-            font-weight: 700;
+            font-weight: 600;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.2s ease;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -1400,6 +1400,37 @@
         .btn-download:hover {
             background: var(--spotify-green-hover);
             transform: scale(1.04);
+        }
+
+        .btn-github {
+            background: transparent;
+            color: var(--spotify-text-base);
+            padding: 10px 20px;
+            border-radius: 500px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--spotify-text-subdued);
+            margin-left: 10px;
+        }
+
+        .btn-github:hover {
+            border-color: var(--spotify-text-base);
+            transform: scale(1.04);
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .modal-section p {
@@ -1830,7 +1861,9 @@
             <div class="albums-grid">
                 <div class="album-card hover-lift" onclick="openProject('Science of Strength AI')">
                     <div class="album-cover">
-                        <img src="Sciofstre_workflow.png" alt="Science of Strength AI" class="album-cover-img">
+                        <div class="album-cover-bg" style="background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);">
+                            <i class="fas fa-robot"></i>
+                        </div>
                         <div class="play-overlay">
                             <i class="fas fa-play"></i>
                         </div>
@@ -1842,7 +1875,9 @@
 
                 <div class="album-card hover-lift" onclick="openProject('Crime Reporting Analysis')">
                     <div class="album-cover">
-                        <img src="Crime_Reporting_Urbanacity_Bar.png" alt="Crime Reporting Analysis" class="album-cover-img">
+                        <div class="album-cover-bg">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
                         <div class="play-overlay">
                             <i class="fas fa-play"></i>
                         </div>
@@ -1854,7 +1889,9 @@
 
                 <div class="album-card hover-lift" onclick="openProject('iPhone Quality Index')">
                     <div class="album-cover">
-                        <img src="Iphone_trend_line.png" alt="iPhone Quality Index" class="album-cover-img">
+                        <div class="album-cover-bg grad-2">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
                         <div class="play-overlay">
                             <i class="fas fa-play"></i>
                         </div>
@@ -2410,6 +2447,16 @@
 
         // Project data
         const projectData = {
+            'Current Project': {
+                subtitle: 'Startup Validation Websites',
+                description: 'Building landing pages to validate startup ideas through market research and user data collection. Focus on testing a Fitness Form Analyzer app concept that uses AI to prevent workout injuries.',
+                tech: ['Claude AI', 'Lovable', 'Replit', 'Google AI Studio', 'HTML/CSS', 'JavaScript', 'Analytics'],
+                impact: 'Creating data-driven validation systems to test market demand before full product development. Implementing email capture, feature ranking surveys, and price sensitivity testing.',
+                insights: 'Using no-code and AI tools to rapidly prototype and test startup ideas without extensive programming experience. Focusing on problem-solution fit before investing in full development.',
+                visuals: [],
+                report: null,
+                github: null
+            },
             'Science of Strength AI': {
                 subtitle: 'GenAI Multimedia Content Creation',
                 description: 'Transformed complex exercise science research papers into engaging multimedia content using advanced AI tools. Created a complete content ecosystem across multiple platforms reaching 18K+ views.',
@@ -2417,7 +2464,8 @@
                 impact: 'Generated 18,100+ YouTube views, 49 hours watch time, and established presence across Spotify, Instagram, and X-Twitter. Achieved 28 YouTube subscribers and 33 Instagram followers within project timeline.',
                 insights: 'Developed an end-to-end AI workflow that bridges academic research and public fitness education. Demonstrated expertise in prompt engineering, multi-platform content strategy, and AI tool orchestration.',
                 visuals: ['Sciofstre_workflow.png'],
-                report: null
+                report: null,
+                github: 'https://github.com/satyapulipelli/science-of-strength-ai'
             },
             'Crime Reporting Analysis': {
                 subtitle: 'Econometric Research Project',
@@ -2426,7 +2474,8 @@
                 impact: 'Discovered significant urban-rural reporting gap of 12.4 percentage points and employment effect of 8.5 percentage points.',
                 insights: 'Challenged conventional assumptions about crime reporting through comprehensive statistical analysis and visualization.',
                 visuals: ['Crime_Reporting_coeffcients.png', 'Crime_Reporting_Urbanacity_Bar.png'],
-                report: 'Pulipelli_SemesterPaper.pdf'
+                report: 'Pulipelli_SemesterPaper.pdf',
+                github: 'https://github.com/satyapulipelli/crime-reporting-analysis'
             },
             'iPhone Quality Index': {
                 subtitle: 'Statistical Analysis Project',
@@ -2435,7 +2484,8 @@
                 impact: 'Demonstrated a 14.25% compound annual growth rate in iPhone quality improvements.',
                 insights: 'Created advanced visualizations revealing distinct evolutionary phases in iPhone development.',
                 visuals: ['Iphone_feature_contribution.png', 'Iphone_feature_heatmap.png', 'Iphone_trend_line.png'],
-                report: 'Development and Analysis of a Comprehensive iPhone Quality Index.docx'
+                report: 'Development and Analysis of a Comprehensive iPhone Quality Index.docx',
+                github: 'https://github.com/satyapulipelli/iphone-quality-index'
             },
             'Data Science Salaries': {
                 subtitle: 'Machine Learning Project',
@@ -2443,8 +2493,9 @@
                 tech: ['Python', 'R', 'Random Forest', 'XGBoost', 'Feature Engineering'],
                 impact: 'Successfully integrated salary data with macroeconomic indicators for comprehensive analysis.',
                 insights: 'Identified key determinants of data science salaries across different countries and experience levels.',
-                visuals: ['DS_Salaries_Heatmap.pdf', 'DS_Salaries_Remote Vs. In-Office Box.pdf', 'DS_Salaries_Salary Vs. GDP_Per_Capita.pdf'],
-                report: 'Pulipelli_ECON5200_Midterm.pdf'
+                visuals: ['DS_Salaries_Heatmap.png', 'DS_Salaries_Remote Vs. In-Office Box.png', 'DS_Salaries_Salary Vs. GDP_Per_Capita.png'],
+                report: 'Pulipelli_ECON5200_Midterm.pdf',
+                github: 'https://github.com/satyapulipelli/ds-salaries-analysis'
             },
             'State Crime Analysis': {
                 subtitle: 'Statistical Analysis Project',
@@ -2453,7 +2504,8 @@
                 impact: 'Created comprehensive statistical models for pattern identification across South Indian states.',
                 insights: 'Revealed significant correlations between economic indicators and crime patterns.',
                 visuals: [],
-                report: 'ANALYSIS OF CRIME DATA.pdf'
+                report: 'ANALYSIS OF CRIME DATA.pdf',
+                github: 'https://github.com/satyapulipelli/state-crime-analysis'
             },
             'Market Penetration': {
                 subtitle: 'Business Analytics Project',
@@ -2506,17 +2558,30 @@
                 `;
             }
 
-            // Build download button HTML
-            let downloadHTML = '';
-            if (project.report) {
-                downloadHTML = `
-                    <div class="modal-download">
+            // Build download and GitHub buttons HTML
+            let buttonsHTML = '';
+            if (project.report || project.github) {
+                buttonsHTML = '<div class="modal-download"><div class="modal-buttons">';
+                
+                if (project.report) {
+                    buttonsHTML += `
                         <a href="${project.report}" download class="btn-download">
                             <i class="fas fa-download"></i>
-                            Download Full Report
+                            Download Report
                         </a>
-                    </div>
-                `;
+                    `;
+                }
+                
+                if (project.github) {
+                    buttonsHTML += `
+                        <a href="${project.github}" target="_blank" class="btn-github">
+                            <i class="fab fa-github"></i>
+                            View on GitHub
+                        </a>
+                    `;
+                }
+                
+                buttonsHTML += '</div></div>';
             }
             
             modalContent.innerHTML = `
@@ -2543,7 +2608,7 @@
                 </div>
                 
                 ${visualizationsHTML}
-                ${downloadHTML}
+                ${buttonsHTML}
             `;
             
             modal.classList.add('active');
@@ -2572,51 +2637,10 @@
         document.querySelector('.now-playing .time').textContent = 
             `${minutes}:${seconds.toString().padStart(2, '0')}`;
 
-        // Now Playing Bar Click Handler
-        document.querySelector('.now-playing').addEventListener('click', function() {
-            // Create popup modal
-            const popup = document.createElement('div');
-            popup.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: var(--spotify-elevated);
-                padding: 2rem;
-                border-radius: 8px;
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-                z-index: 3000;
-                text-align: center;
-                min-width: 300px;
-                animation: popupFadeIn 0.3s ease;
-            `;
-            
-            popup.innerHTML = `
-                <h3 style="color: var(--spotify-green); margin-bottom: 1rem; font-size: 1.2rem;">🚀 Project Loading</h3>
-                <p style="color: var(--spotify-text-subdued); margin-bottom: 1.5rem;">This project is currently in development and will be live soon!</p>
-                <button onclick="this.parentElement.remove()" style="
-                    background: var(--spotify-green);
-                    color: var(--spotify-black);
-                    border: none;
-                    padding: 8px 24px;
-                    border-radius: 500px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: all 0.2s ease;
-                ">Got it!</button>
-            `;
-            
-            document.body.appendChild(popup);
-            
-            // Remove popup when clicking outside
-            setTimeout(() => {
-                document.addEventListener('click', function removePopup(e) {
-                    if (!popup.contains(e.target)) {
-                        popup.remove();
-                        document.removeEventListener('click', removePopup);
-                    }
-                });
-            }, 100);
+        // Now Playing Bar Click Handler - Show Current Project
+        document.querySelector('.now-playing').addEventListener('click', function(e) {
+            e.stopPropagation();
+            openProject('Current Project');
         });
 
         // Skills Animation
