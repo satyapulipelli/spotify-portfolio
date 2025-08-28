@@ -1385,14 +1385,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 24px;
-            flex-wrap: wrap;
+            gap: 20px;  /* Adjust spacing between buttons */
         }
 
         .btn-download {
             background: var(--spotify-green);
             color: var(--spotify-black);
-            padding: 12px 32px;
+            padding: 11px 28px;  /* Slightly adjust padding */
             border-radius: 500px;
             font-weight: 700;
             text-decoration: none;
@@ -1400,7 +1399,7 @@
             align-items: center;
             gap: 8px;
             transition: all 0.2s ease;
-            font-size: 14px;
+            font-size: 13px;  /* Slightly smaller */
             text-transform: uppercase;
             letter-spacing: 0.8px;
             border: none;
@@ -1415,7 +1414,7 @@
         .btn-github {
             background: transparent;
             color: var(--spotify-text-base);
-            padding: 12px 32px;
+            padding: 11px 28px;  /* Match download button padding */
             border-radius: 500px;
             font-weight: 700;
             text-decoration: none;
@@ -1423,10 +1422,10 @@
             align-items: center;
             gap: 8px;
             transition: all 0.2s ease;
-            font-size: 14px;
+            font-size: 13px;  /* Match download button size */
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            border: 1px solid rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--spotify-text-base);  /* Cleaner white border */
             white-space: nowrap;
         }
 
