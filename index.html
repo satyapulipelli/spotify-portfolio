@@ -2408,8 +2408,8 @@
                     // Scroll to section with offset to prevent overlap
                     const target = document.getElementById(targetId);
                     if (target) {
-                        const offset = 20; // Small offset to prevent overlap
-                        const targetPosition = target.offsetTop - offset;
+                        const offset = targetId === 'contact' ? 100 : 20;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
                         window.scrollTo({
                             top: targetPosition,
                             behavior: 'smooth'
