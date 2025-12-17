@@ -1407,13 +1407,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;  /* Adjust spacing between buttons */
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
-        .btn-download {
+        .btn-download,
+        .btn-website {
             background: var(--spotify-green);
             color: var(--spotify-black);
-            padding: 11px 28px;  /* Slightly adjust padding */
+            padding: 10px 22px;
             border-radius: 500px;
             font-weight: 700;
             text-decoration: none;
@@ -1421,9 +1423,9 @@
             align-items: center;
             gap: 8px;
             transition: all 0.2s ease;
-            font-size: 13px;  /* Slightly smaller */
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.6px;
             border: none;
             white-space: nowrap;
         }
@@ -1890,7 +1892,7 @@
                 <div class="hero-content">
                     <div class="hero-badge">
                         <i class="fas fa-circle hero-badge-icon"></i>
-                        <span class="hero-badge-text">Available for Opportunities</span>
+                        <span class="hero-badge-text">Seeking Opportunities</span>
                     </div>
                     
                     <div class="hero-top">
@@ -1901,6 +1903,7 @@
                             <h1 class="hero-title">Satya Harish</h1>
                             <p class="hero-subtitle">Data Science & Economics • Northeastern University</p>
                             <p class="hero-subtitle" style="color: var(--spotify-green); margin-top: -0.5rem;">Startup Enthusiast • Future Founder</p>
+                            <p class="hero-subtitle" style="margin-top: -0.5rem;">Data Science Fellow • University Registrar Office</p>
                         </div>
                     </div>
                     
@@ -1928,7 +1931,7 @@
                             <i class="fas fa-play"></i>
                             Play My Projects
                         </a>
-                        <a href="mailto:pulipellisatyaharishreddy@gmail.com" class="btn btn-secondary">
+                        <a href="/cdn-cgi/l/email-protection#e393968f8a93868f8f8a9082979a828b82918a908b918687879aa3848e828a8fcd808c8e" class="btn btn-secondary">
                             <i class="fas fa-envelope"></i>
                             Contact Me
                         </a>
@@ -2020,6 +2023,30 @@
             </div>
 
             <div class="albums-grid">
+                <div class="album-card hover-lift" onclick="openProject('Demand-Based Scheduling System')">
+                    <div class="album-cover">
+                        <img src="neu_logo.png" alt="Northeastern University" class="album-cover-img">
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <h3 class="album-title">Demand-Based Scheduling</h3>
+                    <p class="album-artist">University Fellowship • 25K+ Records</p>
+                    <p class="album-year">2025-2026</p>
+                </div>
+                
+                <div class="album-card hover-lift" onclick="openProject('KYROS')">
+                    <div class="album-cover">
+                        <img src="kyros_bg.png" alt="KYROS" class="album-cover-img">
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <h3 class="album-title">KYROS</h3>
+                    <p class="album-artist">Gym Booking Platform • India</p>
+                    <p class="album-year">2025</p>
+                </div>
+
                 <div class="album-card hover-lift" onclick="openProject('Science of Strength AI')">
                     <div class="album-cover">
                         <div class="album-cover-bg" style="background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);">
@@ -2251,6 +2278,27 @@
             <div class="tour-container">
                 <div class="tour-stop">
                     <div class="tour-content hover-lift">
+                        <div class="venue-name">Data Science Fellow</div>
+                        <div class="venue-company">Northeastern University, Registrar Office</div>
+                        <div class="venue-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Boston, MA
+                        </div>
+                        <div class="venue-description">
+                            <ul>
+                                <li>Collaborated with University Registrar Office to transform course scheduling from supply-based to demand-based models through network analysis and enrollment pattern modeling</li>
+                                <li>Engineered automated ETL pipeline to extract and structure data from 5,248 pages of unstructured PDF catalogs, parsing 8,072 prerequisite relationships</li>
+                                <li>Developed Graph Neural Network with multi-head attention for bottleneck discovery and LSTM model for course sequence prediction using PyTorch</li>
+                                <li>Implemented sentence transformer models for semantic course analysis identifying 25,431 similar course pairs, and designed 8-tab interactive Plotly Dash dashboard analyzing 25,000+ enrollment records</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tour-date">Oct 2025 - Present</div>
+                    <div class="tour-connector"></div>
+                </div>
+
+                <div class="tour-stop">
+                    <div class="tour-content hover-lift">
                         <div class="venue-name">Business Development Analyst</div>
                         <div class="venue-company">Micro SaaS Capital</div>
                         <div class="venue-location">
@@ -2288,7 +2336,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="tour-date">Sep 2024 - Present</div>
+                    <div class="tour-date">Sep 2024 - May 2025</div>
                     <div class="tour-connector"></div>
                 </div>
             </div>
@@ -2460,7 +2508,7 @@
             <p class="section-subtitle">Ready to collaborate on your next data-driven project</p>
         </div>
         <div class="contact-links">
-            <a href="mailto:pulipellisatyaharishreddy@gmail.com" class="contact-link">
+            <a href="/cdn-cgi/l/email-protection#6010150c0910050c0c091301141901080112091308120504041920070d01090c4e030f0d" class="contact-link">
                 <i class="fas fa-envelope"></i>
                 <span>Email Me</span>
             </a>
@@ -2485,11 +2533,11 @@
     <div class="now-playing">
         <div class="now-playing-track">
             <div class="track-cover">
-                <i class="fas fa-rocket"></i>
+                <i class="fas fa-dumbbell"></i>
             </div>
             <div class="track-info">
-                <h4>Building Websites to Validate Startup Ideas</h4>
-                <p>Currently Working On • Data Collection Phase</p>
+                <h4>Building KYROS MVP</h4>
+                <p>Currently Working On • Native iOS App Development</p>
             </div>
         </div>
 
@@ -2535,7 +2583,7 @@
         </div>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Hide loading screen
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -2608,15 +2656,36 @@
 
         // Project data
         const projectData = {
-            'Current Project': {
-                subtitle: 'Startup Validation Websites',
-                description: 'Building landing pages to validate startup ideas through market research and user data collection. Focus on testing a Fitness Form Analyzer app concept that uses AI to prevent workout injuries.',
-                tech: ['Claude AI', 'Lovable', 'Replit', 'Google AI Studio', 'HTML/CSS', 'JavaScript', 'Analytics'],
-                impact: 'Creating data-driven validation systems to test market demand before full product development. Implementing email capture, feature ranking surveys, and price sensitivity testing.',
-                insights: 'Using no-code and AI tools to rapidly prototype and test startup ideas without extensive programming experience. Focusing on problem-solution fit before investing in full development.',
+            'Demand-Based Scheduling System': {
+                subtitle: 'University Fellowship • Registrar Office',
+                description: 'Partnered with Northeastern University Registrar Office to transform course scheduling from supply-based to demand-based models. Built comprehensive analytics infrastructure combining network analysis, machine learning, and enrollment data to identify structural barriers in academic pathways across 6,364 courses and 936 programs. Developed automated ETL pipelines processing 5,248 pages of unstructured PDF catalogs with zero API costs. Created interactive 8-tab Plotly Dash dashboard analyzing 25,000+ enrollment records across 17 terms, revealing that 36 percent of courses operate at or over capacity.',
+                tech: ['Python', 'Plotly Dash', 'PyTorch', 'Graph Neural Networks', 'LSTM', 'Sentence Transformers', 'BeautifulSoup4', 'Regex', 'NetworkX', 'Pandas', 'NLP'],
+                impact: 'Engineered zero-cost ETL pipeline processing 5,248 pages into structured data with 8,072 prerequisite relationships mapped. Developed GNN and LSTM models for bottleneck discovery and sequence prediction. Identified 25,431 similar course pairs through semantic analysis across 334 content clusters.',
+                insights: 'Combined structural analysis with behavioral data to identify where program design creates friction in student pathways. Demonstrated innovative integration of Graph Neural Networks, LSTM sequence modeling, and causal inference techniques.',
                 visuals: [],
                 report: null,
                 github: null
+            },
+            'KYROS Gym Booking Platform': {
+                subtitle: 'Startup MVP • India Market',
+                description: 'Building a comprehensive gym booking and management platform for the Indian fitness market. Developing MVP to streamline gym reservations, class scheduling, and member management.',
+                tech: ['React', 'Next.js', 'Vercel', 'UI/UX Design', 'Full-Stack Development'],
+                impact: 'Creating modern booking infrastructure to solve gym capacity management challenges in India. MVP deployed and live for user testing.',
+                insights: 'Combining market research with rapid prototyping to validate product-market fit before full-scale development.',
+                visuals: [],
+                report: null,
+                website: 'https://kyros-beta.vercel.app/'
+            },
+            'KYROS': {
+                subtitle: 'Pay-Per-Visit Fitness Platform',
+                description: 'Building a gym booking platform that lets users book gym sessions, yoga classes, and fitness studios without monthly subscriptions. On a mission to save Indians ₹1000 Crores in unused gym memberships. Features dynamic daily passes at 30% below walk-in rates, weekly passes, and gym-specific credit bundles. Partner gyms receive 75-80% of every booking.',
+                tech: ['Swift', 'React', 'Vite', 'Tailwind CSS', 'Firebase', 'Firestore', 'Google Sheets API', 'Vercel'],
+                impact: 'Validated market demand through landing page with waitlist signups, user surveys, and referral tracking. Targeting tech professionals in Hyderabad with 6 distinct user segments including business travelers, occasional users, and fitness variety seekers.',
+                insights: 'Competing against FITPASS with better gym payouts (75-80% vs low payouts), zero commitment model, and no hidden blackout restrictions. India fitness market projected to grow from ₹16,200 crore to ₹37,700 crore by 2030.',
+                visuals: [],
+                report: null,
+                github: null,
+                website: 'https://kyros-beta.vercel.app/'
             },
             'Science of Strength AI': {
                 subtitle: 'GenAI Multimedia Content Creation',
@@ -2721,8 +2790,17 @@
 
             // Build download and GitHub buttons HTML
             let buttonsHTML = '';
-            if (project.report || project.github) {
+            if (project.report || project.github || project.website) {
                 buttonsHTML = '<div class="modal-download"><div class="modal-buttons">';
+                
+                if (project.website) {
+                    buttonsHTML += `
+                        <a href="${project.website}" target="_blank" class="btn-website">
+                            <i class="fas fa-external-link-alt"></i>
+                            Website
+                        </a>
+                    `;
+                }
                 
                 if (project.report) {
                     buttonsHTML += `
@@ -2801,7 +2879,7 @@
         // Now Playing Bar Click Handler - Show Current Project
         document.querySelector('.now-playing').addEventListener('click', function(e) {
             e.stopPropagation();
-            openProject('Current Project');
+            openProject('KYROS');
         });
 
         // Skills Animation
